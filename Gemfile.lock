@@ -124,7 +124,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   ember-rails
-  ember-source (= 1.0.0)
+  ember-source (~> 1.0.0)
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
