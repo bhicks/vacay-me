@@ -13,5 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require vacay_me
+VacayMe = Ember.Application.create();
 //= require_tree .
+
 //= require sass-bootstrap
+//= require handlebars
+//= require ember
