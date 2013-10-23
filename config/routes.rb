@@ -1,6 +1,7 @@
 VacayMe::Application.routes.draw do
+  # TODO: remove root application#index
   get "static/index"
-  root to: "static#index"
+  root to: "application#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
