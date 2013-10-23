@@ -3,11 +3,11 @@ VacayMe.Router.map ->
 
 VacayMe.HolidaysRoute = Ember.Route.extend
   setupController: (controller) ->
-    controller.set('holidays', [])
-    # controller.set('holidays', [{
-    #                              name: 'Christmas',
-    #                              date: '12/25/2013'
-    #                            },{
-    #                              name: 'July 4th',
-    #                              date: '7/4/2013'
-    #                            }])
+    controller.set('content', [{
+        name: 'Christmas',
+        date: '12/25/2013'
+      },{
+        name: 'July 4th',
+        date: '7/4/2013'
+      }]
+    )
