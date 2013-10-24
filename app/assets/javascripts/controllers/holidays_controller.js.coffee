@@ -1,1 +1,2 @@
-VacayMe.HolidaysController = Ember.ArrayController.extend()
+VacayMe.HolidaysController = Ember.ArrayController.extend
+  itemController: 'holiday'
