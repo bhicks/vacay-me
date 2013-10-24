@@ -1,5 +1,9 @@
 <ul>
   {{#each controller}}
-    <li>{{name}} is on {{date}}
+  <li>
+  <button type='button' {{bind-attr class=':btn selected:btn-primary:btn-default'}}>
+      {{name}} ({{date}})
+    </button>
+  </li>
   {{/each}}
 </ul>
