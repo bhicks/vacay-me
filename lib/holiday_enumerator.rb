@@ -13,6 +13,7 @@ class HolidayEnumerator
   private
 
   def calendar_items
+    raise ArgumentError, 'A valid google access key is required' if invalid_request?
     json_response['items'].map do |item|
       {
         summary:    item['summary'],
@@ -22,12 +23,21 @@ class HolidayEnumerator
     end
   end
 
+  def invalid_request?
+    return false unless response_error
+    response_error['code'] == 400
+  end
+
   def response
-    @response ||= HTTParty.get GoogleCalendarRequestString.new
+    HTTParty.get GoogleCalendarRequestString.new
   end
 
   def json_response
     @json_response ||= JSON.parse(response.body)
+  end
+
+  def response_error
+    json_response['error']
   end
 
   class GoogleCalendarRequestString
@@ -45,7 +55,7 @@ class HolidayEnumerator
     private
 
     def google_access_key
-      ENV.fetch('GOOGLE_ACCESS_KEY') { raise ArgumentError, 'A google access key is required' }
+      ENV.fetch('GOOGLE_ACCESS_KEY') { raise ArgumentError, 'A valid google access key is required' }
     end
 
     class Params
