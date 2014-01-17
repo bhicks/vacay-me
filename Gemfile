@@ -41,6 +41,12 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+  gem 'timecop'
+end
+
 group :development do
   gem 'awesome_print'
 end

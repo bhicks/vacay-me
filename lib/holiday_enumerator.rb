@@ -13,7 +13,7 @@ class HolidayEnumerator
   private
 
   def calendar_items
-    raise ArgumentError, 'A valid google access key is required' if invalid_request?
+    fail ArgumentError,'A valid google access key is required' if invalid_request?
     json_response['items'].map do |item|
       {
         summary:    item['summary'],
@@ -55,7 +55,9 @@ class HolidayEnumerator
     private
 
     def google_access_key
-      ENV.fetch('GOOGLE_ACCESS_KEY') { raise ArgumentError, 'A valid google access key is required' }
+      ENV.fetch('GOOGLE_ACCESS_KEY') do
+        fail ArgumentError, 'A valid google access key is required'
+      end
     end
 
     class Params
