@@ -43,7 +43,10 @@ RSpec.configure do |config|
   config.order = 'random'
 end
 
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/vcr'
-  config.hook_into :webmock
-end
+WebMock.disable!
+
+# TODO: configure VCR to conditionally mock. too much for now.
+# VCR.configure do |config|
+#   config.cassette_library_dir = 'spec/vcr'
+#   config.hook_into :webmock
+# end
