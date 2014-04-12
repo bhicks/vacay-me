@@ -12,15 +12,13 @@ gem 'sass-rails', '~> 4.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-group :assets do
-  # Use CoffeeScript for .js.coffee assets and views
-  gem 'coffee-rails', '~> 4.0.0'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
-  # Use jquery as the JavaScript library
-  gem 'jquery-rails'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
-  gem 'ember-rails'
-end
+gem 'ember-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -28,12 +26,32 @@ end
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+gem 'holiday_list'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+gem 'httparty'
+
+group :development, :test do
+  gem 'dotenv-rails'
+  gem 'rspec-rails'
+  gem 'pry'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+  gem 'timecop'
+end
+
+group :development do
+  gem 'awesome_print'
 end
 
 # Use ActiveModel has_secure_password

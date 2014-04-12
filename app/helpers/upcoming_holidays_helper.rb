@@ -1,0 +1,2 @@
+module UpcomingHolidaysHelper
+end

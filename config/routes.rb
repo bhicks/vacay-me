@@ -1,4 +1,5 @@
 VacayMe::Application.routes.draw do
+  get "upcoming_holidays/index"
   # TODO: remove root application#index
   get "static/index"
   root to: "application#index"
