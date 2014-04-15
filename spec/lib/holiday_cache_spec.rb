@@ -23,22 +23,30 @@ describe HolidayCache do
 
   describe '#store' do
     it 'stores results in redis' do
-      mock_redis.should_receive(:zadd).with(HolidayCache::KEY, 1392098400, holiday)
+      mock_redis.should_receive(:zadd).with(HolidayCache::KEY, 1392098400, holiday.to_json)
       subject.store
     end
 
     it 'doesnt add to redis if the key hasnt changed'
 
     it 'removes old keys' do
-      subject.should_receive(:clear_passed)
+      subject.should_receive(:clear)
       subject.store
     end
   end
 
-  describe '#clear_passed' do
-    it 'removes old holidays from redis' do
-      mock_redis.should_receive(:zremrangebyscore).with(HolidayCache::KEY, 0, 1397408400)
-      subject.clear_passed
+  describe '#clear' do
+    it 'respects a start option' do
+
+    end
+
+    it 'respects an end option' do
+
+    end
+
+    it 'clears everything without options' do
+      mock_redis.should_receive(:del).with(HolidayCache::KEY)
+      subject.clear
     end
   end
 
@@ -64,5 +72,4 @@ describe HolidayCache do
         }.to raise_error(ArgumentError)
       end
     end
-  end
-end
+  end end
