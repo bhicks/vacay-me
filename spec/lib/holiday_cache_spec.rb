@@ -15,7 +15,7 @@ describe HolidayCache do
 
   describe '#store' do
     it 'stores results in redis' do
-      mock_redis.should_receive(:zadd).with('vacay_me::holidays', 1392098400, holiday)
+      mock_redis.should_receive(:zadd).with(HolidayCache::KEY, 1392098400, holiday)
       subject.store
     end
 
@@ -37,13 +37,13 @@ describe HolidayCache do
     end
 
     it 'removes old holidays from redis' do
-      mock_redis.should_receive(:zrangebyscore).with('vacay_me::holidays', 0, 1397408400).and_return([holiday])
+      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([holiday])
       mock_redis.should_receive(:zrem).with('vacay_me::holidays', holiday)
       subject.clear_passed
     end
 
     it 'does not remove new holidays from redis' do
-      mock_redis.should_receive(:zrangebyscore).with('vacay_me::holidays', 0, 1397408400).and_return([])
+      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([])
       mock_redis.should_not_receive(:zrem)
       subject.clear_passed
     end
