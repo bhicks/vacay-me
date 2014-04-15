@@ -27,6 +27,7 @@ gem 'ember-rails'
 gem 'turbolinks'
 
 gem 'holiday_list'
+gem 'redis'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -42,6 +43,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'pry'
+  gem 'timecop'
 end
 
 group :test do
