@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe HolidayCache do
+  before(:all) do
+    Timecop.freeze Time.local(2014, 04, 14, 12, 0, 0)
+  end
+
+  after(:all) do
+    Timecop.return
+  end
+
   let(:mock_redis) { double.as_null_object }
   let(:holiday) {
     {
@@ -28,14 +36,6 @@ describe HolidayCache do
   end
 
   describe '#clear_passed' do
-    before do
-      Timecop.freeze Time.local(2014, 04, 14, 12, 0, 0)
-    end
-
-    after do
-      Timecop.return
-    end
-
     it 'removes old holidays from redis' do
       mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([holiday])
       mock_redis.should_receive(:zrem).with('vacay_me::holidays', holiday)
@@ -46,6 +46,30 @@ describe HolidayCache do
       mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([])
       mock_redis.should_not_receive(:zrem)
       subject.clear_passed
+    end
+  end
+
+  describe '#retrieve' do
+    context 'without params' do
+      it 'uses 1 year from now in zrangebyscore call' do
+        mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 1397494800, 1429030800)
+        subject.retrieve
+      end
+    end
+
+    context 'with a time param' do
+      it 'uses the param in zrangebyscore call' do
+        mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 1397494800, 1408035600)
+        subject.retrieve Time.local(2014, 8, 14, 12, 0, 0)
+      end
+    end
+
+    context 'with a non-time param' do
+      it 'raises an error' do
+        expect {
+          subject.retrieve 'foobar'
+        }.to raise_error(ArgumentError)
+      end
     end
   end
 end

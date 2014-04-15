@@ -18,6 +18,12 @@ class HolidayCache
     end
   end
 
+  def retrieve(end_time = Time.now + 1.year)
+    raise ArgumentError, 'end_time must be a Time' unless end_time.class == Time
+
+    Redis.current.zrangebyscore(KEY, Time.now.to_i, end_time.to_i)
+  end
+
   private
 
   def holidays
