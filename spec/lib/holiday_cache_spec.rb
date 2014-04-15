@@ -37,14 +37,7 @@ describe HolidayCache do
 
   describe '#clear_passed' do
     it 'removes old holidays from redis' do
-      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([holiday])
-      mock_redis.should_receive(:zrem).with('vacay_me::holidays', holiday)
-      subject.clear_passed
-    end
-
-    it 'does not remove new holidays from redis' do
-      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 0, 1397408400).and_return([])
-      mock_redis.should_not_receive(:zrem)
+      mock_redis.should_receive(:zremrangebyscore).with(HolidayCache::KEY, 0, 1397408400)
       subject.clear_passed
     end
   end
