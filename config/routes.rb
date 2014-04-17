@@ -1,5 +1,5 @@
 VacayMe::Application.routes.draw do
-  get "upcoming_holidays/index"
+  get 'holidays', to: 'holidays#index'
   # TODO: remove root application#index
   get "static/index"
   root to: "application#index"
@@ -44,7 +44,7 @@ VacayMe::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
