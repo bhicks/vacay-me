@@ -2,7 +2,7 @@
   {{#each controller}}
   <li>
     <button type='button' {{bind-attr class=':btn selected:btn-primary:btn-default'}} {{action "toggleSelected"}}>
-      {{name}} ({{date}})
+      {{name}} ({{displayDate}})
     </button>
   </li>
   {{/each}}

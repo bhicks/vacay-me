@@ -1,6 +1,7 @@
 {
   "name": "VacayMe",
   "dependencies": {
-    "sass-bootstrap": "~3.0.0"
+    "sass-bootstrap": "~3.0.0",
+    "momentjs": "~2.6.0"
   }
 }

@@ -3,6 +3,10 @@ VacayMe.Holiday = DS.Model.extend
   selected: DS.attr('boolean')
   date: DS.attr('date')
 
+  displayDate: (->
+    moment(@get 'date' ).format 'l'
+  ).property 'date'
+
 VacayMe.Holiday.FIXTURES = [
   {
     id: 1,

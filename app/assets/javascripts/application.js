@@ -16,6 +16,7 @@
 //= require ember-data
 //= require_self
 //= require vacay_me
+//= require momentjs/moment
 VacayMe = Ember.Application.create();
 
 //= require sass-bootstrap
