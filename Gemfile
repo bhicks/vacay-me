@@ -37,8 +37,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'httparty'
-
 group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
