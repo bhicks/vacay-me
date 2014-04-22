@@ -10,11 +10,11 @@ describe HolidayCache do
   end
 
   let(:mock_redis) { double.as_null_object }
-  let(:holiday) {
+  let(:holiday) do
     {
       start_date: Date.new(2014, 2, 11)
     }
-  }
+  end
 
   before do
     Redis.stub(:current).and_return(mock_redis)
@@ -23,7 +23,9 @@ describe HolidayCache do
 
   describe '#store' do
     it 'stores results in redis' do
-      mock_redis.should_receive(:zadd).with(HolidayCache::KEY, 1392098400, holiday.to_json)
+      mock_redis
+        .should_receive(:zadd)
+        .with(HolidayCache::KEY, 1_392_098_400, holiday.to_json)
       subject.store
     end
 
@@ -50,18 +52,23 @@ describe HolidayCache do
     it 'returns hash with symbols as keys'
 
     it 'uses 1 year from now in zrangebyscore call without params' do
-      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 1397494800, 1429030800)
+      mock_redis
+        .should_receive(:zrangebyscore)
+        .with(HolidayCache::KEY, 1_397_494_800, 1_429_030_800)
       subject.retrieve
     end
 
     it 'uses the param in zrangebyscore call with a time param' do
-      mock_redis.should_receive(:zrangebyscore).with(HolidayCache::KEY, 1397494800, 1408035600)
+      mock_redis
+        .should_receive(:zrangebyscore)
+        .with(HolidayCache::KEY, 1_397_494_800, 1_408_035_600)
       subject.retrieve Time.local(2014, 8, 14, 12, 0, 0)
     end
 
     it 'raises an error with a non-time param' do
-      expect {
+      expect do
         subject.retrieve 'foobar'
-      }.to raise_error(ArgumentError)
+      end.to raise_error(ArgumentError)
     end
-  end end
+  end
+end

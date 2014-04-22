@@ -9,7 +9,8 @@ class HolidayCache
     clear
 
     holidays.each do |holiday|
-      Redis.current.zadd KEY, holiday[:start_date].to_time.to_i, holiday.to_json
+      start = holiday[:start_date].to_time.to_i
+      Redis.current.zadd KEY, start, holiday.to_json
     end
   end
 
